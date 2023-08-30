@@ -1,33 +1,12 @@
-import { Controller, Get, Put, Delete, Post } from '@nestjs/common';
-import { BookService } from './book.service';
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
 
-@Controller("/book")
-export class BookController{
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
 
-  public bookService : BookService = new BookService();
-
-  // add book
-  @Post('/add')
-  addBook() : string{
-    return this.bookService.addBook();
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
   }
-  
-  // delete book
-  @Delete("/delete")
-  deleteBook() : string {
-    return this.bookService.deleteBook();
-  }
-
-  // update book
-  @Put("/update")
-  updateBook() : string {
-    return this.bookService.updateBook();
-  }
-
-  // find all book
-  @Get("/findAll")
-  findAllBook() : string{
-    return this.bookService.findBooks();
-  }
-
 }
